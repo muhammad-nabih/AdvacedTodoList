@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html {
+  scroll-behavior: smooth;
+  background-color: rgba(0, 0, 0, 0.138);
+
+}
+
+/* تخصيص الشريط نفسه */
+::-webkit-scrollbar {
+  width: 10px;
+  /* عرض الشريط */
+}
+
+/* تخصيص الجزء القابل للتمرير من الشريط (الإبهام) */
+::-webkit-scrollbar-thumb {
+  background: #1976d2;
+  /* لون الخلفية */
+  border-radius: 99999px;
+  /* زوايا مستديرة */
+}
+
+/* تخصيص الجزء الثابت من الشريط (المسار) */
+::-webkit-scrollbar-track {
+  background: #202124;
+  /* لون الخلفية */
+}

@@ -1,0 +1,15 @@
+.highlight {
+  position: relative;
+}
+
+.highlight::after{
+  content: "";
+  width: 10px;
+  height: 100%;
+  background-color:var(--after-background-color) ;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+
+}
