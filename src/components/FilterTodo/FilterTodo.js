@@ -44,7 +44,11 @@ export default function ToggleBtnGroup() {
         exclusive
         onChange={handleChange}
         aria-label="Platform"
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          margin: "10px auto ",
+        }}
       >
         <ToggleButton value="all">all</ToggleButton>
         <ToggleButton value="completed">completed</ToggleButton>

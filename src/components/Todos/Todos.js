@@ -6,7 +6,6 @@ import { TodosContext } from "../context/TodosContext";
 const Todos = () => {
   const { todos } = React.useContext(TodosContext);
 
-  console.log(todos);
   const todoJsx = todos.map((t, index) => {
     return <Todo key={index} todo={t} />;
   });

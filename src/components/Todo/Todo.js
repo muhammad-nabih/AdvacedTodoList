@@ -8,10 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
-
+import { useContext } from "react";
+import { TodosContext } from "../context/TodosContext";
 const Todo = ({ todo }) => {
   const { id, title, details, completed, priority, date } = todo;
-  console.log(id, title, details, completed, priority, date);
+
+  const { todos, setTodos } = useContext(TodosContext);
 
   let priorityHighlight =
     priority === "Low"
@@ -23,8 +25,20 @@ const Todo = ({ todo }) => {
       : "white";
 
   // EVENT HANDLERS
-  function handleEditTask() {}
-  function handleDeleteTask() {}
+  // don't forget popup for updating and deleting
+  function handleEditTask() {
+    const todosAfterEdit = todos.map((todo) => {
+      if (todo.id === id) {
+      }
+    });
+  }
+  function handleDeleteTask() {
+    const todosAfterDelete = todos.filter((todo) => {
+      return todo.id !== id;
+    });
+    setTodos(todosAfterDelete);
+    localStorage.setItem("todos", JSON.stringify(todosAfterDelete));
+  }
 
   return (
     <div

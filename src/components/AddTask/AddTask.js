@@ -7,32 +7,30 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { format } from "date-fns"; // استوردنا دالة format من مكتبة date-fns
-//Local Component
+
+import format from "date-fns/format";
+// Local Components
 import Todos from "../Todos/Todos";
 import ToggleBtnGroup from "../FilterTodo/FilterTodo";
 import { TodosContext } from "../context/TodosContext";
-import { v4 as uuidv4 } from "uuid";
+
 const AddTask = () => {
   const { todos, setTodos } = useContext(TodosContext);
 
   const [inputs, setInputs] = useState({
-    title: "", // قمت بتعديل قيمة الافتراض إلى فارغة
-    details: "", // قمت بتعديل قيمة الافتراض إلى فارغة
+    title: "",
+    details: "",
+    date: "", // تم تضمين حقل التاريخ هنا
   });
 
-  const [selectedDate, setSelectedDate] = useState(null);
   const [priority, setPriority] = useState("");
 
-  const { title, details } = inputs;
+  const { title, details, date } = inputs;
 
   const handleChange = (event) => {
     setPriority(event.target.value);
@@ -51,46 +49,36 @@ const AddTask = () => {
   const handleCreateTask = () => {
     const newTask = {
       id: Date.now(),
-      title: title,
-      details: details,
+      title,
+      details,
       completed: false,
-      priority: priority,
-      date: selectedDate,
+      priority,
+      date,
     };
 
-    const addTask = [...todos, newTask];
-    setTodos(addTask);
-    localStorage.setItem("todos", JSON.stringify(addTask));
-    handleClose();
+    const updatedTodos = [...todos, newTask];
+    setTodos(updatedTodos);
 
-    setInputs("");
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+
+    handleClose();
+    setInputs({ title: "", details: "", date: "" });
   };
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("todos") || []);
+    const data = JSON.parse(localStorage.getItem("todos")) || [];
     setTodos(data);
   }, [setTodos]);
 
   return (
-    <div
-      className="add_task"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        gap: "20px",
-        margin: "30px auto",
-        width: "80%",
-      }}
-    >
+    <div className="add_task">
       <Button
-        sx={{ display: "flex", justifyContent: "start", gap: 3 }}
         fullWidth
         variant="outlined"
         startIcon={<AddIcon />}
         onClick={handleClickOpen}
       >
-        ADD NEW TASK
+        Add New Task
       </Button>
 
       <ToggleBtnGroup />
@@ -99,11 +87,12 @@ const AddTask = () => {
         <DialogTitle>New Task</DialogTitle>
 
         <DialogContent
-          style={{
+          sx={{
             display: "flex",
             justifyContent: "center",
             flexDirection: "column",
-            gap: "20px",
+            gap: "15px",
+            alignItems: "center",
           }}
         >
           <TextField
@@ -114,10 +103,10 @@ const AddTask = () => {
             type="text"
             fullWidth
             variant="outlined"
-            style={{ marginTop: "20px" }}
             value={title}
             onChange={(e) => setInputs({ ...inputs, title: e.target.value })}
           />
+
           <TextField
             id="outlined-multiline-static"
             label="Details"
@@ -128,44 +117,39 @@ const AddTask = () => {
             onChange={(e) => setInputs({ ...inputs, details: e.target.value })}
           />
 
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              value={selectedDate}
-              onChange={(newDate) => {
-                setSelectedDate(format(newDate.$d, "MM/dd/yyyy"));
-              }}
-            />
-          </LocalizationProvider>
+          <TextField
+            label="Due Date"
+            fullWidth
+            type="date"
+            value={date}
+            onChange={(e) => setInputs({ ...inputs, date: e.target.value })}
+          />
 
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Priority</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={priority}
-                label="Priority"
-                onChange={handleChange}
-              >
-                <MenuItem value={"Low"}>Low</MenuItem>
-                <MenuItem value={"Medium"}>Medium</MenuItem>
-                <MenuItem value={"High"}>High</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+          {/* Priority selection input */}
+
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Priority</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={priority}
+              label="Priority"
+              onChange={handleChange}
+            >
+              <MenuItem value={"Low"}>Low </MenuItem>
+              <MenuItem value={"Medium"}>Medium</MenuItem>
+              <MenuItem value={"High"}>High </MenuItem>
+            </Select>
+          </FormControl>
         </DialogContent>
+
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleCreateTask}>Create Task</Button>
         </DialogActions>
       </Dialog>
 
-      <Todos
-        title={title}
-        details={details}
-        priority={priority}
-        date={selectedDate}
-      />
+      <Todos title={title} details={details} priority={priority} date={date} />
     </div>
   );
 };
