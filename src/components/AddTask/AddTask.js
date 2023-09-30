@@ -89,10 +89,11 @@ const AddTask = () => {
         <DialogContent
           sx={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "start",
             flexDirection: "column",
             gap: "15px",
-            alignItems: "center",
+            alignItems: "start",
+            
           }}
         >
           <TextField
@@ -103,6 +104,7 @@ const AddTask = () => {
             type="text"
             fullWidth
             variant="outlined"
+            required
             value={title}
             onChange={(e) => setInputs({ ...inputs, title: e.target.value })}
           />
@@ -127,7 +129,7 @@ const AddTask = () => {
 
           {/* Priority selection input */}
 
-          <FormControl fullWidth>
+          <FormControl fullWidth >
             <InputLabel id="demo-simple-select-label">Priority</InputLabel>
             <Select
               labelId="demo-simple-select-label"

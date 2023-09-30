@@ -236,6 +236,7 @@ const Todo = ({ todo }) => {
               <MenuItem value={"High"}>High</MenuItem>
             </Select>
           </FormControl>
+          
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
