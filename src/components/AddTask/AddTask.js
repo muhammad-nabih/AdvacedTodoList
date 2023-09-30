@@ -71,7 +71,10 @@ const AddTask = () => {
 
 
   return (
-    <div className="add_task">
+    <div
+      className="add_task"
+      style={{ display: "flex", flexDirection: "column" }}
+    >
       <Button
         fullWidth
         variant="outlined"
@@ -80,8 +83,6 @@ const AddTask = () => {
       >
         Add New Task
       </Button>
-
-
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Task</DialogTitle>
@@ -93,7 +94,6 @@ const AddTask = () => {
             flexDirection: "column",
             gap: "15px",
             alignItems: "start",
-            
           }}
         >
           <TextField
@@ -104,7 +104,6 @@ const AddTask = () => {
             type="text"
             fullWidth
             variant="outlined"
-            required
             value={title}
             onChange={(e) => setInputs({ ...inputs, title: e.target.value })}
           />
@@ -129,7 +128,7 @@ const AddTask = () => {
 
           {/* Priority selection input */}
 
-          <FormControl fullWidth >
+          <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Priority</InputLabel>
             <Select
               labelId="demo-simple-select-label"
