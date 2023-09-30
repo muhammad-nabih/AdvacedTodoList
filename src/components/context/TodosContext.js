@@ -1,5 +1,19 @@
-import { createContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-export const TodosContext = createContext([]);
+const TodosContext = createContext();
 
+export const useTodos = () => {
+  return useContext(TodosContext);
+};
 
+export const TodosContextProvider = ({ children }) => {
+  const [todos, setTodos] = useState([]);
+
+  return (
+    <TodosContext.Provider value={{ todos, setTodos }}>
+      {children}
+    </TodosContext.Provider>
+  );
+};
+
+export default TodosContext;

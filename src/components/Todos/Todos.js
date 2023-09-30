@@ -1,11 +1,10 @@
 import React from "react";
 
 import Todo from "../Todo/Todo";
-import { TodosContext } from "../context/TodosContext";
+import { useTodos } from "../context/TodosContext";
 
 const Todos = () => {
-  const { todos } = React.useContext(TodosContext);
-
+  const { todos } = useTodos();
   const todoJsx = todos.map((t, index) => {
     return <Todo key={index} todo={t} />;
   });

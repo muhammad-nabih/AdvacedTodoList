@@ -18,13 +18,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { TodosContext } from "../context/TodosContext";
-
+import { useTodos } from "../context/TodosContext";
 const Todo = ({ todo }) => {
   const { id, title, details, completed, priority, date } = todo;
   const [inputs, setInputs] = useState({ ...todo });
-
-  const { todos, setTodos } = useContext(TodosContext);
+  const { todos, setTodos } = useTodos();
 
   const priorityColors = {
     Low: "#faf089",

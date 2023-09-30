@@ -10,13 +10,13 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useEffect, useContext, useState } from "react";
-import { TodosContext } from "../context/TodosContext";
+import { useEffect, useState } from "react";
+import { useTodos } from "../context/TodosContext";
 // Local Components
 import Todos from "../Todos/Todos";
 
 const AddTask = () => {
-  const { todos, setTodos } = useContext(TodosContext);
+ const { todos, setTodos } = useTodos();
 
   const [inputs, setInputs] = useState({
     title: "",
