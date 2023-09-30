@@ -77,7 +77,8 @@ const AddTask = () => {
     >
       <Button
         fullWidth
-        variant="outlined"
+        variant="contained"
+        style={{fontSize:"1.6rem"}}
         startIcon={<AddIcon />}
         onClick={handleClickOpen}
       >
