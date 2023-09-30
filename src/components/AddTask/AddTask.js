@@ -1,4 +1,3 @@
-import React, { useContext, useEffect, useState } from "react";
 import "./AddTask.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -7,17 +6,14 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
-import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
-import format from "date-fns/format";
+import { useEffect, useContext, useState } from "react";
+import { TodosContext } from "../context/TodosContext";
 // Local Components
 import Todos from "../Todos/Todos";
-import ToggleBtnGroup from "../FilterTodo/FilterTodo";
-import { TodosContext } from "../context/TodosContext";
 
 const AddTask = () => {
   const { todos, setTodos } = useContext(TodosContext);
@@ -70,6 +66,10 @@ const AddTask = () => {
     setTodos(data);
   }, [setTodos]);
 
+
+
+
+
   return (
     <div className="add_task">
       <Button
@@ -81,7 +81,7 @@ const AddTask = () => {
         Add New Task
       </Button>
 
-      <ToggleBtnGroup />
+
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Task</DialogTitle>

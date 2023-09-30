@@ -1,5 +1,5 @@
 import React from "react";
-import "./Todos.css";
+
 import Todo from "../Todo/Todo";
 import { TodosContext } from "../context/TodosContext";
 
